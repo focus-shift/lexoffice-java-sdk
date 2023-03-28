@@ -7,6 +7,8 @@ This project is an unofficial Java SDK for the [lexoffice Public API](https://ww
 
 This project requires Java 17 runtime.
 
+With Version 1.x lexoffice-java-sdk is using spring boot 3 bom.
+If your project is using spring boot 2.x bom, please use 0.x release.
 
 ## Usage
 
