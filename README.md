@@ -5,10 +5,13 @@ This project is an unofficial Java SDK for the [lexoffice Public API](https://ww
 
 ## Requirements
 
-This project requires Java 21 runtime.
 
-With Version 1.x lexoffice-java-sdk is using spring boot 3 bom.
-If your project is using spring boot 2.x bom, please use 0.x release.
+| lexoffice-java-sdk | Java | Spring Boot |
+|--------------------|------|-------------|
+| 2.x                | 21   | 3.3.x       |
+| 1.x                | 17   | 3.1.x       |
+| 0.x                | 17   | 2.7.x       |
+
 
 ## Usage
 
