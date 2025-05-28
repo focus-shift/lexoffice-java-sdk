@@ -8,6 +8,7 @@ This project is an unofficial Java SDK for the [lexoffice Public API](https://ww
 
 | lexoffice-java-sdk | Java | Spring Boot |
 |--------------------|------|-------------|
+| 2.1                | 21   | 3.4.x       |
 | 2.x                | 21   | 3.3.x       |
 | 1.x                | 17   | 3.1.x       |
 | 0.x                | 17   | 2.7.x       |
