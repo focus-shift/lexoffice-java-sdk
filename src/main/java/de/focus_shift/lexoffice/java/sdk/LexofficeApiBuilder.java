@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter(AccessLevel.PACKAGE)
 public class LexofficeApiBuilder {
 
-    public static final String LEXOFFICE_API = "api.lexoffice.io/v1";
+    public static final String LEXOFFICE_API = "api.lexware.io/v1";
 
     private String host = LEXOFFICE_API;
     private String apiToken = null;

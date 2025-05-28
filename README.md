@@ -1,13 +1,15 @@
 # Lexoffice Java SDK
 
-This project is an unofficial Java SDK for the [lexoffice Public API](https://www.lexoffice.de/funktionen/public-api/).
+This project is an unofficial Java SDK for the [Lexware Office Public API](https://office.lexware.de/funktionen/public-api/).
 
+Use 3.x to access the api via https://api.lexware.io instead of https://api.lexoffice.io.
 
 ## Requirements
 
 
 | lexoffice-java-sdk | Java | Spring Boot |
 |--------------------|------|-------------|
+| 3.0                | 21   | 3.4.x       |
 | 2.1                | 21   | 3.4.x       |
 | 2.x                | 21   | 3.3.x       |
 | 1.x                | 17   | 3.1.x       |
