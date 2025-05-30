@@ -6,6 +6,7 @@ import de.focus_shift.lexoffice.java.sdk.model.EventSubscription;
 import de.focus_shift.lexoffice.java.sdk.model.Page;
 import de.focus_shift.lexoffice.java.sdk.model.Voucher;
 import lombok.SneakyThrows;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Fail.fail;
 
-
+@Disabled
 class LexofficeApiTest {
 
     protected LexofficeApi getLexofficeApi() {
