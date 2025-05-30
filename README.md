@@ -9,6 +9,7 @@ Use 3.x to access the api via https://api.lexware.io instead of https://api.lexo
 
 | lexoffice-java-sdk | Java | Spring Boot |
 |--------------------|------|-------------|
+| 3.2                | 21   | 3.5.x       |
 | 3.0                | 21   | 3.4.x       |
 | 2.1                | 21   | 3.4.x       |
 | 2.x                | 21   | 3.3.x       |
