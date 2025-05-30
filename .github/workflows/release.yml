@@ -5,18 +5,19 @@ on:
     tags:
       - 'v*'
 
+env:
+  MAVEN_ARGS: "--no-transfer-progress --errors --fail-at-end --show-version"
+
 jobs:
   release:
     runs-on: ubuntu-24.04
-    env:
-      MAVEN_CLI_OPTS: "--batch-mode --no-transfer-progress --errors --fail-at-end --show-version"
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 21
+      - name: Set up JDK from .tool-versions
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: 21
+          java-version-file: '.tool-versions'
           cache: 'maven'
           server-id: 'ossrh'
           server-username: OSSRH_USERNAME
@@ -24,14 +25,8 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: GPG_PASSPHRASE
       - name: Build with Maven
-        run: >
-          ./mvnw $MAVEN_CLI_OPTS
-          -Prelease
-          clean deploy
+        run: ./mvnw -Prelease clean deploy
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-      - name: Extract release tag
-        id: vars
-        run: echo ::set-output name=version::${GITHUB_REF#refs/*/v}
