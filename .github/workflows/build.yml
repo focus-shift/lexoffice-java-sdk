@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version-file: '.tool-versions'
+          java-version: 21
           cache: 'maven'
       - name: Build
         run: ./mvnw verify
