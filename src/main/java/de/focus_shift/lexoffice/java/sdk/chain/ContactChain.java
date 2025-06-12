@@ -155,7 +155,7 @@ public class ContactChain {
 
         @SneakyThrows
         public Contact update(Contact contact) {
-            return getContext().execute(getUriBuilder().appendPath(contact.getId()), HttpMethod.PUT, contact, TYPE_REFERENCE);
+            return getContext().execute(getUriBuilder().appendPath("/" + contact.getId()), HttpMethod.PUT, contact, TYPE_REFERENCE);
         }
     }
 
