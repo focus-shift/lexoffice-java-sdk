@@ -18,6 +18,11 @@ public class LexofficeApiBuilder {
     }
 
 
+    public LexofficeApiBuilder host(String host) {
+        this.host = host;
+        return this;
+    }
+
     public LexofficeApiBuilder throttleProvider(ThrottleProvider throttleProvider) {
         this.throttleProvider = throttleProvider;
         return this;
