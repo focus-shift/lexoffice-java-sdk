@@ -7,7 +7,6 @@ import lombok.Getter;
 public class LexofficeApiBuilder {
 
     public static final String LEXOFFICE_API = "api.lexware.io/v1";
-    public static final String LEXOFFICE_SANDBOX_API = "api.lexware-sandbox.io/v1";
 
     private String host = LEXOFFICE_API;
     private String apiToken = null;
@@ -19,8 +18,8 @@ public class LexofficeApiBuilder {
     }
 
 
-    public LexofficeApiBuilder sandboxed(boolean sandboxed) {
-        this.host = sandboxed ? LEXOFFICE_SANDBOX_API : LEXOFFICE_API;
+    public LexofficeApiBuilder host(String host) {
+        this.host = host;
         return this;
     }
 
