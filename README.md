@@ -50,6 +50,7 @@ The following Endpoints are implemented based on lexoffice developer documentati
 * [x] Event Subscriptions Endpoint
 * [ ] Files Endpoint
 * [x] Invoices Endpoint
+* [x] Invoices File Endpoint
 * [ ] Order Confirmations Endpoint
 * [ ] Payments Endpoint
 * [ ] Payment Conditions Endpoint
