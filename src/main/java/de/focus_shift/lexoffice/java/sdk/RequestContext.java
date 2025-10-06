@@ -2,9 +2,11 @@ package de.focus_shift.lexoffice.java.sdk;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.focus_shift.lexoffice.java.sdk.model.DocumentFile;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,10 +14,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Objects;
 
 public class RequestContext {
 
@@ -33,7 +38,9 @@ public class RequestContext {
                 .build();
         this.requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
         restTemplate = new RestTemplate(requestFactory);
-        restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter(getObjectMapper())));
+        restTemplate.setMessageConverters(Arrays.asList(
+                new MappingJackson2HttpMessageConverter(getObjectMapper()),
+                new ByteArrayHttpMessageConverter()));
     }
 
 
@@ -72,6 +79,32 @@ public class RequestContext {
 
 
         return response.getBody();
+    }
+
+    public synchronized DocumentFile execute(RestUriBuilder uriBuilder, HttpMethod method, MediaType accept) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(Objects.requireNonNull(accept, "accept header must not be null")));
+        headers.add("Authorization", "Bearer " + apiBuilder.getApiToken());
+
+        checkThrottlePeriod();
+
+        HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+        ResponseEntity<byte[]> response = restTemplate.exchange(uriBuilder.build(), method, requestEntity, byte[].class);
+        lastCall = System.currentTimeMillis();
+        if (apiBuilder.throttleProviderPresent()) {
+            apiBuilder.getThrottleProvider()
+                    .apiCalled();
+        }
+
+        ContentDisposition contentDisposition = response.getHeaders().getContentDisposition();
+
+        return DocumentFile.builder()
+                .content(response.getBody())
+                .contentType(response.getHeaders().getContentType())
+                .contentLength(response.getHeaders().getContentLength())
+                .filename(contentDisposition != null ? contentDisposition.getFilename() : null)
+                .build();
     }
 
     public synchronized void delete(RestUriBuilder uriBuilder) {
