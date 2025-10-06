@@ -4,6 +4,9 @@ package de.focus_shift.lexoffice.java.sdk.chain;
 import de.focus_shift.lexoffice.java.sdk.LexofficeApi;
 import de.focus_shift.lexoffice.java.sdk.model.Address;
 import de.focus_shift.lexoffice.java.sdk.model.Currency;
+import de.focus_shift.lexoffice.java.sdk.RequestContext;
+import de.focus_shift.lexoffice.java.sdk.RestUriBuilder;
+import de.focus_shift.lexoffice.java.sdk.model.DocumentFile;
 import de.focus_shift.lexoffice.java.sdk.model.Invoice;
 import de.focus_shift.lexoffice.java.sdk.model.LineItem;
 import de.focus_shift.lexoffice.java.sdk.model.LineItemType;
@@ -17,10 +20,16 @@ import de.focus_shift.lexoffice.java.sdk.model.UnitPrice;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.verify;
 
 class InvoiceChainTest {
 
@@ -81,5 +90,62 @@ class InvoiceChainTest {
                 .build();
 
         lexofficeApi.invoice().create().submit(invoice);
+    }
+
+    @Test
+    void downloadInvoiceFileDefaultsToPdf() {
+        RequestContext context = Mockito.mock(RequestContext.class);
+        DocumentFile documentFile = DocumentFile.builder().build();
+        RestUriBuilder uriBuilder = new RestUriBuilder().protocol("https").host("api.lexware.io");
+
+        Mockito.when(context.getUriBuilder()).thenReturn(uriBuilder);
+        Mockito.when(context.execute(uriBuilder, HttpMethod.GET, MediaType.APPLICATION_PDF)).thenReturn(documentFile);
+
+        DocumentFile result = new InvoiceChain(context).file("invoice-id").download();
+
+        assertThat(result).isSameAs(documentFile);
+        assertThat(uriBuilder.build()).isEqualTo("https://api.lexware.io/invoices/invoice-id/file");
+        verify(context).execute(uriBuilder, HttpMethod.GET, MediaType.APPLICATION_PDF);
+    }
+
+    @Test
+    void downloadInvoiceFileAsXml() {
+        RequestContext context = Mockito.mock(RequestContext.class);
+        DocumentFile documentFile = DocumentFile.builder().build();
+        RestUriBuilder uriBuilder = new RestUriBuilder().protocol("https").host("api.lexware.io");
+
+        Mockito.when(context.getUriBuilder()).thenReturn(uriBuilder);
+        Mockito.when(context.execute(uriBuilder, HttpMethod.GET, MediaType.APPLICATION_XML)).thenReturn(documentFile);
+
+        DocumentFile result = new InvoiceChain(context).file("invoice-id").asXml().download();
+
+        assertThat(result).isSameAs(documentFile);
+        verify(context).execute(uriBuilder, HttpMethod.GET, MediaType.APPLICATION_XML);
+    }
+
+    @Test
+    void downloadInvoiceFileWithAnyRepresentation() {
+        RequestContext context = Mockito.mock(RequestContext.class);
+        DocumentFile documentFile = DocumentFile.builder().build();
+        RestUriBuilder uriBuilder = new RestUriBuilder().protocol("https").host("api.lexware.io");
+
+        Mockito.when(context.getUriBuilder()).thenReturn(uriBuilder);
+        Mockito.when(context.execute(uriBuilder, HttpMethod.GET, MediaType.ALL)).thenReturn(documentFile);
+
+        DocumentFile result = new InvoiceChain(context).file("invoice-id").anyRepresentation().download();
+
+        assertThat(result).isSameAs(documentFile);
+        verify(context).execute(uriBuilder, HttpMethod.GET, MediaType.ALL);
+    }
+
+    @Test
+    void rejectUnsupportedMediaType() {
+        RequestContext context = Mockito.mock(RequestContext.class);
+        RestUriBuilder uriBuilder = new RestUriBuilder().protocol("https").host("api.lexware.io");
+        Mockito.when(context.getUriBuilder()).thenReturn(uriBuilder);
+
+        InvoiceChain.FileDownload download = new InvoiceChain(context).file("invoice-id");
+
+        assertThatThrownBy(() -> download.accept(MediaType.APPLICATION_JSON)).isInstanceOf(IllegalArgumentException.class);
     }
 }
