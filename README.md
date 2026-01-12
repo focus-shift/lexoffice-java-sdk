@@ -24,7 +24,7 @@ Include lexoffice java-sdk to your project:
 
 ```xml
 <dependency>
-    <groupId>de.focus-shift.lexoffice</groupId>
+    <groupId>de.octalog.lexoffice</groupId>
     <artifactId>java-sdk</artifactId>
     <version>...</version>
 </dependency>
@@ -74,5 +74,5 @@ Lexoffice Java SDK is Open Source software released under the [MIT license](LICE
 
 ## Credits
 
-This project is based on the work of [rocketbase-io/lexoffice-api](https://github.com/rocketbase-io/lexoffice-api)
-and [focus-shift/lexoffice-java-sdk](https://github.com/focus-shift/lexoffice-java-sdk)
+This project is a fork of [focus-shift/lexoffice-java-sdk](https://github.com/focus-shift/lexoffice-java-sdk)
+which is based on the work of [rocketbase-io/lexoffice-api](https://github.com/rocketbase-io/lexoffice-api)

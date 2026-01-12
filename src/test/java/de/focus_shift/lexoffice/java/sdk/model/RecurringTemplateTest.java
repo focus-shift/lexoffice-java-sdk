@@ -1,4 +1,4 @@
-package de.focus_shift.lexoffice.java.sdk.model;
+package de.octalog.lexoffice.java.sdk.model;
 
 import org.junit.jupiter.api.Test;
 import tools.jackson.databind.json.JsonMapper;

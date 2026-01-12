@@ -19,7 +19,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.focus-shift.lexoffice</groupId>
+    <groupId>de.octalog.lexoffice</groupId>
     <artifactId>java-sdk</artifactId>
     <version>3.7.0-SNAPSHOT</version>
 
@@ -29,7 +29,7 @@
         Unofficial Java SDK for the lexoffice Public API.
     </description>
 
-    <url>https://github.com/focus-shift/lexoffice-java-sdk</url>
+    <url>https://github.com/octalog-de/lexware-java-sdk</url>
 
     <licenses>
         <license>
@@ -40,17 +40,17 @@
 
     <developers>
         <developer>
-            <name>Johannes Graf</name>
-            <email>johannes.graf@focus-shift.de</email>
-            <organization>Focus Shift Software GmbH</organization>
-            <organizationUrl>https://focus-shift.de/</organizationUrl>
+            <name>Marcel Richter</name>
+            <email>info@octalog.de</email>
+            <organization>octalog</organization>
+            <organizationUrl>https://octalog.de/</organizationUrl>
         </developer>
     </developers>
 
     <scm>
-        <url>https://github.com/focus-shift/lexoffice-java-sdk</url>
-        <developerConnection>scm:git:git@github.com:focus-shift/lexoffice-java-sdk.git</developerConnection>
-        <connection>scm:git:git@github.com:focus-shift/lexoffice-java-sdk.git</connection>
+        <url>https://github.com/octalog-de/lexware-java-sdk</url>
+        <developerConnection>scm:git:git@github.com:octalog-de/lexware-java-sdk.git</developerConnection>
+        <connection>scm:git:git@github.com:octalog-de/lexware-java-sdk.git</connection>
         <tag>HEAD</tag>
     </scm>
 

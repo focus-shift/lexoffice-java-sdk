@@ -81,7 +81,7 @@ Contains POJOs representing Lexware API entities:
 ### Package Structure
 
 ```
-de.focus_shift.lexoffice.java.sdk/
+de.octalog.lexoffice.java.sdk/
 ├── LexofficeApi.java              # Main API facade
 ├── LexofficeApiBuilder.java       # Builder for API instances
 ├── RequestContext.java            # HTTP client and throttling
