@@ -74,5 +74,5 @@ Lexoffice Java SDK is Open Source software released under the [MIT license](LICE
 
 ## Credits
 
-This project is based on the work of [rocketbase-io/lexoffice-api](https://github.com/rocketbase-io/lexoffice-api) and
-forked from commit [c192de26e150ff08559d91713e634fe233dc8e08](https://github.com/rocketbase-io/lexoffice-api/commit/c192de26e150ff08559d91713e634fe233dc8e08)
+This project is based on the work of [rocketbase-io/lexoffice-api](https://github.com/rocketbase-io/lexoffice-api)
+and [focus-shift/lexoffice-java-sdk](https://github.com/focus-shift/lexoffice-java-sdk)
