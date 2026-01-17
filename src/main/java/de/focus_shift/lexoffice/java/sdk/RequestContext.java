@@ -1,7 +1,5 @@
 package de.focus_shift.lexoffice.java.sdk;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.springframework.core.ParameterizedTypeReference;
@@ -12,10 +10,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+import tools.jackson.databind.json.JsonMapper;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class RequestContext {
 
@@ -33,14 +32,12 @@ public class RequestContext {
                 .build();
         this.requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
         restTemplate = new RestTemplate(requestFactory);
-        restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter(getObjectMapper())));
+        restTemplate.setMessageConverters(List.of(new JacksonJsonHttpMessageConverter(getJsonMapper())));
     }
 
 
-    protected ObjectMapper getObjectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return mapper;
+    protected JsonMapper getJsonMapper() {
+        return JsonMapper.builder().build();
     }
 
 
@@ -57,7 +54,7 @@ public class RequestContext {
     public synchronized <R, E> R execute(RestUriBuilder uriBuilder, HttpMethod method, E body, ParameterizedTypeReference<R> responseType) {
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.add("Authorization", "Bearer " + apiBuilder.getApiToken());
 
         checkThrottlePeriod();
@@ -77,7 +74,7 @@ public class RequestContext {
     public synchronized void delete(RestUriBuilder uriBuilder) {
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.add("Authorization", "Bearer " + apiBuilder.getApiToken());
 
         checkThrottlePeriod();
