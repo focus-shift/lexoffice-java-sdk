@@ -21,7 +21,7 @@
 
     <groupId>de.focus-shift.lexoffice</groupId>
     <artifactId>java-sdk</artifactId>
-    <version>3.4.0-SNAPSHOT</version>
+    <version>3.4.0</version>
 
     <name>Lexoffice Java SDK</name>
 
