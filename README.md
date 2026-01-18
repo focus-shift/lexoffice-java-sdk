@@ -2,7 +2,7 @@
 
 This project is an unofficial Java SDK for the [Lexware Office Public API](https://office.lexware.de/funktionen/public-api/).
 
-Use 3.x to access the api via https://api.lexware.io instead of https://api.lexoffice.io.
+Use 3.x to access the api via https://api.lexware.io (formerly https://api.lexoffice.io).
 
 ## Requirements
 
@@ -35,12 +35,12 @@ String apiToken = "";
 LexwareApi lexwareApi = new LexwareApiBuilder().apiToken(apiToken).build();
 ```
 
-See FAQ [Get an API key](https://developers.lexoffice.io/docs/#faq-get-an-api-key) to generate an API key.
+See FAQ [Get an API key](https://developers.lexware.io/docs/#faq-get-an-api-key) to generate an API key.
 
 
 ## Implementation Status
 
-The following Endpoints are implemented based on Lexware developer documentation [change-log](https://developers.lexoffice.io/docs/#change-log) of 16.08.2022.
+The following Endpoints are implemented based on Lexware developer documentation [change-log](https://developers.lexware.io/docs/#change-log) of 16.08.2022.
 
 * [x] Contacts Endpoint
 * [ ] Countries Endpoint
@@ -64,7 +64,7 @@ The following Endpoints are implemented based on Lexware developer documentation
 
 ## Reference documentation
 
-See [Lexware API Documentation](https://developers.lexoffice.io/docs/).
+See [Lexware API Documentation](https://developers.lexware.io/docs/).
 
 
 ## License
