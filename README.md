@@ -1,4 +1,4 @@
-# Lexoffice Java SDK
+# Lexware Java SDK
 
 This project is an unofficial Java SDK for the [Lexware Office Public API](https://office.lexware.de/funktionen/public-api/).
 
@@ -7,7 +7,7 @@ Use 3.x to access the api via https://api.lexware.io instead of https://api.lexo
 ## Requirements
 
 
-| lexoffice-java-sdk | Java | Spring Boot |
+| lexware-java-sdk | Java | Spring Boot |
 |--------------------|------|-------------|
 | 3.5                | 21   | 4.0.x       |
 | 3.2                | 21   | 3.5.x       |
@@ -20,11 +20,11 @@ Use 3.x to access the api via https://api.lexware.io instead of https://api.lexo
 
 ## Usage
 
-Include lexoffice java-sdk to your project:
+Include Lexware java-sdk to your project:
 
 ```xml
 <dependency>
-    <groupId>de.octalog.lexoffice</groupId>
+    <groupId>de.octalog.lexware</groupId>
     <artifactId>java-sdk</artifactId>
     <version>...</version>
 </dependency>
@@ -32,7 +32,7 @@ Include lexoffice java-sdk to your project:
 
 ```java
 String apiToken = "";
-LexofficeApi lexofficeApi = new LexofficeApiBuilder().apiToken(apiToken).build();
+LexwareApi lexwareApi = new LexwareApiBuilder().apiToken(apiToken).build();
 ```
 
 See FAQ [Get an API key](https://developers.lexoffice.io/docs/#faq-get-an-api-key) to generate an API key.
@@ -40,7 +40,7 @@ See FAQ [Get an API key](https://developers.lexoffice.io/docs/#faq-get-an-api-ke
 
 ## Implementation Status
 
-The following Endpoints are implemented based on lexoffice developer documentation [change-log](https://developers.lexoffice.io/docs/#change-log) of 16.08.2022.
+The following Endpoints are implemented based on Lexware developer documentation [change-log](https://developers.lexoffice.io/docs/#change-log) of 16.08.2022.
 
 * [x] Contacts Endpoint
 * [ ] Countries Endpoint
@@ -64,12 +64,12 @@ The following Endpoints are implemented based on lexoffice developer documentati
 
 ## Reference documentation
 
-See [lexoffice API Documentation](https://developers.lexoffice.io/docs/).
+See [Lexware API Documentation](https://developers.lexoffice.io/docs/).
 
 
 ## License
 
-Lexoffice Java SDK is Open Source software released under the [MIT license](LICENSE).
+Lexware Java SDK is Open Source software released under the [MIT license](LICENSE).
 
 
 ## Credits

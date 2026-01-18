@@ -31,14 +31,14 @@ This is an unofficial Java SDK for the Lexware Office Public API (formerly Lexof
 
 ### Core Components
 
-**LexofficeApi** - Main entry point created via `LexofficeApiBuilder`. Provides access to endpoint-specific chains:
+**LexwareApi** - Main entry point created via `LexwareApiBuilder`. Provides access to endpoint-specific chains:
 - `contact()` → ContactChain
 - `invoice()` → InvoiceChain
 - `quotation()` → QuotationChain
 - `voucherList()` → VoucherListChain
 - `eventSubscriptions()` → EventSubscriptionChain
 
-**LexofficeApiBuilder** - Builder for creating `LexofficeApi` instances:
+**LexwareApiBuilder** - Builder for creating `LexwareApi` instances:
 - `apiToken(String)` - Set API token (required)
 - `host(String)` - Override default host (default: `api.lexware.io/v1`)
 - `throttleProvider(ThrottleProvider)` - Custom throttle management (optional)
@@ -81,9 +81,9 @@ Contains POJOs representing Lexware API entities:
 ### Package Structure
 
 ```
-de.octalog.lexoffice.java.sdk/
-├── LexofficeApi.java              # Main API facade
-├── LexofficeApiBuilder.java       # Builder for API instances
+de.octalog.lexware.java.sdk/
+├── LexwareApi.java                # Main API facade
+├── LexwareApiBuilder.java         # Builder for API instances
 ├── RequestContext.java            # HTTP client and throttling
 ├── RestUriBuilder.java            # URI construction utility
 ├── chain/                         # Fluent API chains
@@ -123,7 +123,7 @@ Not yet implemented:
 2. Create a chain class in `chain/` package extending `RequestChain`
 3. Add nested static classes for different operations (Get, Fetch, Create, Update)
 4. Each operation class extends `ExecutableRequestChain`
-5. Add accessor method in `LexofficeApi` class
+5. Add accessor method in `LexwareApi` class
 
 ### API Rate Limiting
 

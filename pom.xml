@@ -19,14 +19,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.octalog.lexoffice</groupId>
+    <groupId>de.octalog.lexware</groupId>
     <artifactId>java-sdk</artifactId>
     <version>3.7.0-SNAPSHOT</version>
 
-    <name>Lexoffice Java SDK</name>
+    <name>Lexware Java SDK</name>
 
     <description>
-        Unofficial Java SDK for the lexoffice Public API.
+        Unofficial Java SDK for the Lexware Public API.
     </description>
 
     <url>https://github.com/octalog-de/lexware-java-sdk</url>
