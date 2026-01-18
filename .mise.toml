@@ -6,24 +6,24 @@ java = "temurin-21"
 
 [tasks.build]
 description = "Build and install locally"
-run = "./mvnw clean install"
+run = "./gradlew build publishToMavenLocal"
 
 [tasks.verify]
 description = "Build and run tests"
-run = "./mvnw verify"
+run = "./gradlew build"
 
 [tasks.test]
 description = "Run all tests"
-run = "./mvnw test"
+run = "./gradlew test"
 
 [tasks.package]
-description = "Build JAR without installing"
-run = "./mvnw clean package"
+description = "Build JARs without running tests"
+run = "./gradlew assemble"
 
 [tasks.release]
 description = "Build with GPG signing and Maven Central publishing"
-run = "./mvnw clean verify -P release"
+run = "./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository"
 
 [tasks.clean]
 description = "Clean build artifacts"
-run = "./mvnw clean"
+run = "./gradlew clean"

@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 env:
-  MAVEN_ARGS: "--no-transfer-progress --errors --fail-at-end --show-version"
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.parallel=false"
 
 jobs:
   release:
@@ -18,15 +18,19 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 21
-          cache: 'maven'
-          server-id: 'central'
-          server-username: CENTRAL_USERNAME
-          server-password: CENTRAL_PASSWORD
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: GPG_PASSPHRASE
-      - name: Build with Maven
-        run: ./mvnw -Prelease clean deploy
+          cache: 'gradle'
+      - name: Load secrets from 1Password
+        uses: 1password/load-secrets-action@v2
+        with:
+          export-env: true
         env:
-          CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
-          CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          GPG_PRIVATE_KEY: "op://Private/GPG-Signing-Key/private-key"
+          GPG_PASSPHRASE: "op://Private/GPG-Signing-Key/passphrase"
+          CENTRAL_USERNAME: "op://Private/Maven-Central/username"
+          CENTRAL_PASSWORD: "op://Private/Maven-Central/password"
+      - name: Publish to Maven Central
+        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
+        env:
+          ORG_GRADLE_PROJECT_signingKey: ${{ env.GPG_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ env.GPG_PASSPHRASE }}

@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  MAVEN_ARGS: "--no-transfer-progress --errors --fail-at-end --show-version"
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs=-Xmx4g"
 
 jobs:
   build:
@@ -27,6 +27,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 21
-          cache: 'maven'
+          cache: 'gradle'
       - name: Build
-        run: ./mvnw verify
+        run: ./gradlew build

@@ -22,12 +22,30 @@ Use 3.x to access the api via https://api.lexware.io (formerly https://api.lexof
 
 Include Lexware java-sdk to your project:
 
+### Maven
+
 ```xml
 <dependency>
     <groupId>de.octalog.lexware</groupId>
     <artifactId>java-sdk</artifactId>
     <version>...</version>
 </dependency>
+```
+
+### Gradle (Kotlin DSL)
+
+```kotlin
+dependencies {
+    implementation("de.octalog.lexware:java-sdk:...")
+}
+```
+
+### Gradle (Groovy DSL)
+
+```groovy
+dependencies {
+    implementation 'de.octalog.lexware:java-sdk:...'
+}
 ```
 
 ```java

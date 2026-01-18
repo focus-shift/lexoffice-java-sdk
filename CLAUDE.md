@@ -10,21 +10,32 @@ This is an unofficial Java SDK for the Lexware Office Public API (formerly Lexof
 
 ### Building
 ```bash
-./mvnw clean install          # Build and install locally
-./mvnw verify                 # Build and run tests
-./mvnw clean package          # Build JAR without installing
+./gradlew build                     # Build and run all tests
+./gradlew assemble                  # Build JARs without running tests
+./gradlew publishToMavenLocal       # Build and install to local Maven cache (~/.m2/repository)
+./gradlew clean build               # Clean and build from scratch
 ```
 
 ### Testing
 ```bash
-./mvnw test                   # Run all tests
-./mvnw test -Dtest=ClassName  # Run a single test class
-./mvnw test -Dtest=ClassName#methodName  # Run a single test method
+./gradlew test                          # Run all tests
+./gradlew test --tests ClassName        # Run a single test class
+./gradlew test --tests ClassName.methodName  # Run a single test method
+./gradlew test --info                   # Run tests with detailed output
 ```
 
-### Release (requires credentials)
+### Publishing (requires credentials)
 ```bash
-./mvnw clean verify -P release  # Build with GPG signing and Maven Central publishing
+./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
+# Builds, signs with GPG (via 1Password), and publishes to Maven Central
+```
+
+### Other Useful Commands
+```bash
+./gradlew tasks                    # List all available tasks
+./gradlew dependencies             # Show dependency tree
+./gradlew clean                    # Remove build outputs
+./gradlew build --scan             # Build with build scan (performance insights)
 ```
 
 ## Architecture
