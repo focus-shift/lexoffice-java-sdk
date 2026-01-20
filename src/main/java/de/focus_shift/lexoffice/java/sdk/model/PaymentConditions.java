@@ -15,6 +15,9 @@ public class PaymentConditions {
     @JsonProperty("paymentTermLabel")
     private String paymentTermLabel;
 
+    @JsonProperty("paymentTermLabelTemplate")
+    private String paymentTermLabelTemplate;
+
     @JsonProperty("paymentTermDuration")
     private Integer paymentTermDuration;
 

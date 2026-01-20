@@ -27,7 +27,11 @@ public enum TaxType {
     /**
      * Ausfuhrlieferungen an Drittländer
      */
-    THIRD_PARTY_COUNTRY_DELIVERY("thirdPartyCountryDelivery");
+    THIRD_PARTY_COUNTRY_DELIVERY("thirdPartyCountryDelivery"),
+    /**
+     * Photovoltaikanlagen
+     */
+    PHOTOVOLTAIC_EQUIPMENT("photovoltaicEquipment");
 
     @Getter
     @JsonValue

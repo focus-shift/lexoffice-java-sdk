@@ -4,6 +4,7 @@ import de.focus_shift.lexoffice.java.sdk.chain.ContactChain;
 import de.focus_shift.lexoffice.java.sdk.chain.EventSubscriptionChain;
 import de.focus_shift.lexoffice.java.sdk.chain.InvoiceChain;
 import de.focus_shift.lexoffice.java.sdk.chain.QuotationChain;
+import de.focus_shift.lexoffice.java.sdk.chain.RecurringTemplateChain;
 import de.focus_shift.lexoffice.java.sdk.chain.VoucherListChain;
 
 import java.text.DateFormat;
@@ -38,6 +39,10 @@ public class LexofficeApi {
 
     public EventSubscriptionChain eventSubscriptions() {
         return new EventSubscriptionChain(context);
+    }
+
+    public RecurringTemplateChain recurringTemplates() {
+        return new RecurringTemplateChain(context);
     }
 
 }

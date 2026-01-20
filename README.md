@@ -57,7 +57,7 @@ The following Endpoints are implemented based on lexoffice developer documentati
 * [ ] Posting Categories Endpoint
 * [ ] Profile Endpoint
 * [x] Quotations
-* [ ] Recurring Templates Endpoint
+* [x] Recurring Templates Endpoint
 * [x] Voucherlist Endpoint
 * [ ] Vouchers Endpoint
 
