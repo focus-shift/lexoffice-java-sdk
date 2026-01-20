@@ -52,7 +52,7 @@ class InvoiceChainTest {
                         .shippingDate(new Date())
                         .shippingType(ShippingType.DELIVERY)
                         .build())
-                .taxConditions(new TaxConditions(TaxType.NET, ""))
+                .taxConditions(TaxConditions.builder().taxType(TaxType.NET).build())
                 .lineItems(Arrays.asList(LineItem.builder()
                                 .type(LineItemType.CUSTOM)
                                 .name("Name")

@@ -18,4 +18,7 @@ public class TaxConditions {
     @JsonProperty("taxTypeNote")
     private String taxTypeNote;
 
+    @JsonProperty("taxSubType")
+    private String taxSubType;
+
 }
