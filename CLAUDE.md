@@ -24,12 +24,6 @@ This is an unofficial Java SDK for the Lexware Office Public API (formerly Lexof
 ./gradlew test --info                   # Run tests with detailed output
 ```
 
-### Publishing (requires credentials)
-```bash
-./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
-# Builds, signs with GPG (via 1Password), and publishes to Maven Central
-```
-
 ### Other Useful Commands
 ```bash
 ./gradlew tasks                    # List all available tasks

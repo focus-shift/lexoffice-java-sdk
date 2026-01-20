@@ -1,36 +1,44 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_run:
+    workflows: ["CI"]
+    branches: ["main"]
+    types: [completed]
 
-env:
-  GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.parallel=false"
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
   release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - name: Set up JDK
-        uses: actions/setup-java@v5
+      - uses: actions/checkout@v4.2.2
         with:
-          distribution: 'temurin'
-          java-version: 21
-          cache: 'gradle'
-      - name: Load secrets from 1Password
-        uses: 1password/load-secrets-action@v2
+          fetch-depth: 0
+          ref: ${{ github.event.workflow_run.head_sha }}
+      - uses: actions/setup-java@v5.1.0
         with:
-          export-env: true
+          distribution: "temurin"
+          java-version-file: .tool-versions
+          cache: "gradle"
+      - uses: actions/setup-node@v4.0.3
+        with:
+          node-version-file: .tool-versions
+      - name: Install semantic-release
+        run: npm install --global semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github @semantic-release/exec conventional-changelog-conventionalcommits
+      - name: Run semantic-release
         env:
-          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          GPG_PRIVATE_KEY: "op://Private/GPG-Signing-Key/private-key"
-          GPG_PASSPHRASE: "op://Private/GPG-Signing-Key/passphrase"
-          CENTRAL_USERNAME: "op://Private/Maven-Central/username"
-          CENTRAL_PASSWORD: "op://Private/Maven-Central/password"
-      - name: Publish to Maven Central
-        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
-        env:
-          ORG_GRADLE_PROJECT_signingKey: ${{ env.GPG_PRIVATE_KEY }}
-          ORG_GRADLE_PROJECT_signingPassword: ${{ env.GPG_PASSPHRASE }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+        run: semantic-release

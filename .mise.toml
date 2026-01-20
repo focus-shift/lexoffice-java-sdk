@@ -1,9 +1,6 @@
 # Mise configuration for Lexware Java SDK
 # https://mise.jdx.dev
 
-[tools]
-java = "temurin-21"
-
 [tasks.build]
 description = "Build and install locally"
 run = "./gradlew build publishToMavenLocal"
@@ -19,10 +16,6 @@ run = "./gradlew test"
 [tasks.package]
 description = "Build JARs without running tests"
 run = "./gradlew assemble"
-
-[tasks.release]
-description = "Build with GPG signing and Maven Central publishing"
-run = "./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository"
 
 [tasks.clean]
 description = "Clean build artifacts"

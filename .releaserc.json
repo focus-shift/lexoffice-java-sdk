@@ -1,0 +1,49 @@
+{
+  "branches": ["main"],
+  "tagFormat": "v${version}",
+  "repositoryUrl": "https://github.com/octalog-de/lexware-java-sdk",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "angular",
+        "releaseRules": [
+          {"type": "chore", "release": "patch"},
+          {"type": "chore", "scope": "ai", "release": false},
+          {"type": "chore", "scope": "deps", "release": false},
+          {"type": "chore", "scope": "project", "release": false},
+          {"type": "refactor", "release": "patch"},
+          {"type": "ci", "release": "patch"},
+          {"type": "test", "release": false},
+          {"type": "docs", "release": "patch"}
+        ],
+        "parserOpts": {
+          "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
+        }
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            {"type": "feat", "section": "✨ Features", "hidden": false},
+            {"type": "fix", "scope": "deps", "section": "📦‍ Dependencies", "hidden": false},
+            {"type": "fix", "section": "🐛 Bug Fixes", "hidden": false},
+            {"type": "chore", "scope": "ai", "hidden": true},
+            {"type": "chore", "scope": "deps", "section": "📦‍ Dependencies", "hidden": false},
+            {"type": "chore", "scope": "project", "section": "📦‍ Dependencies", "hidden": false},
+            {"type": "chore", "section": "🛠️ Maintenance", "hidden": false},
+            {"type": "refactor", "section": "🛠️ Maintenance", "hidden": false},
+            {"type": "ci", "section": "🛠️ Maintenance", "hidden": false},
+            {"type": "test", "section": "🛠️ Maintenance", "hidden": false},
+            {"type": "docs", "section": "📚 Documentation", "hidden": false},
+            {"type": "revert", "section": "🔙 Reverts", "hidden": false}
+          ]
+        }
+      }
+    ],
+    "@semantic-release/github"
+  ]
+}
