@@ -33,7 +33,7 @@ jobs:
         with:
           node-version-file: .tool-versions
       - name: Install semantic-release
-        run: npm install --global semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github @semantic-release/exec conventional-changelog-conventionalcommits
+        run: npm install --global semantic-release@24.2.3 @semantic-release/exec@7.1.0 conventional-changelog-conventionalcommits@8.0.0
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

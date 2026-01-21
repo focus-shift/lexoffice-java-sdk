@@ -44,6 +44,12 @@
         }
       }
     ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "./gradlew -PVERSION_NAME=${nextRelease.version} publishToMavenCentral"
+      }
+    ],
     "@semantic-release/github"
   ]
 }
