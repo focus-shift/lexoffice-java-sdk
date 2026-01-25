@@ -56,6 +56,10 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.named("generateMetadataFileForMavenPublication") {
+    dependsOn(tasks.named("plainJavadocJar"))
+}
+
 mavenPublishing {
     publishToMavenCentral(automaticRelease = true)
     signAllPublications()
