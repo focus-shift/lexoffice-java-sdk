@@ -56,8 +56,8 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.named("generateMetadataFileForMavenPublication") {
-    dependsOn(tasks.named("plainJavadocJar"))
+tasks.matching { it.name == "generateMetadataFileForMavenPublication" }.configureEach {
+    dependsOn(tasks.matching { it.name == "plainJavadocJar" })
 }
 
 mavenPublishing {
