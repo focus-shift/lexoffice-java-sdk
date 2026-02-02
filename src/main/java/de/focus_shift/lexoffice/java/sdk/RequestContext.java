@@ -43,7 +43,7 @@ public class RequestContext {
 
     public RestUriBuilder getUriBuilder() {
         return new RestUriBuilder()
-                .protocol("https")
+                .protocol(apiBuilder.getProtocol())
                 .host(apiBuilder.getHost());
     }
 

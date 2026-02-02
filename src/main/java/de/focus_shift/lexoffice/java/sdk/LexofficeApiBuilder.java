@@ -1,5 +1,6 @@
 package de.focus_shift.lexoffice.java.sdk;
 
+import com.google.common.base.Preconditions;
 import lombok.AccessLevel;
 import lombok.Getter;
 
@@ -8,6 +9,7 @@ public class LexofficeApiBuilder {
 
     public static final String LEXOFFICE_API = "api.lexware.io/v1";
 
+    private String protocol = "https";
     private String host = LEXOFFICE_API;
     private String apiToken = null;
     private ThrottleProvider throttleProvider;
@@ -17,6 +19,15 @@ public class LexofficeApiBuilder {
         return this;
     }
 
+
+    public LexofficeApiBuilder protocol(String protocol) {
+        Preconditions.checkArgument(
+            "http".equals(protocol) || "https".equals(protocol),
+            "Protocol must be 'http' or 'https'"
+        );
+        this.protocol = protocol;
+        return this;
+    }
 
     public LexofficeApiBuilder host(String host) {
         this.host = host;
