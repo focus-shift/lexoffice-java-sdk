@@ -246,10 +246,11 @@ class ContactChainIntegrationTest {
   @Test
   void fetchContactsFilteredByNameWithSpecialCharacters() {
     String companyName = "Müller & Söhne GmbH";
+    String htmlEncodedName = "Müller &amp; Söhne GmbH";
 
     stubFor(
         get(urlPathEqualTo("/v1/contacts"))
-            .withQueryParam("name", equalTo(companyName))
+            .withQueryParam("name", equalTo(htmlEncodedName))
             .willReturn(
                 aResponse()
                     .withHeader("Content-Type", "application/json")

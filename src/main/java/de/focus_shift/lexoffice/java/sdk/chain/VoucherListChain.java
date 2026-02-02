@@ -3,6 +3,7 @@ package de.focus_shift.lexoffice.java.sdk.chain;
 import com.google.common.base.Joiner;
 import de.focus_shift.lexoffice.java.sdk.LexofficeApi;
 import de.focus_shift.lexoffice.java.sdk.RequestContext;
+import de.focus_shift.lexoffice.java.sdk.SearchStringEncoder;
 import de.focus_shift.lexoffice.java.sdk.model.Page;
 import de.focus_shift.lexoffice.java.sdk.model.Voucher;
 import de.focus_shift.lexoffice.java.sdk.model.VoucherStatus;
@@ -91,9 +92,12 @@ public class VoucherListChain extends ExecutableRequestChain {
         return this;
     }
 
+    /**
+     * @see SearchStringEncoder
+     */
     public VoucherListChain voucherNumber(String voucherNumber) {
         super.getUriBuilder()
-                .addParameter("voucherNumber", voucherNumber);
+                .addParameter("voucherNumber", SearchStringEncoder.htmlEncode(voucherNumber));
         return this;
     }
 
@@ -120,9 +124,12 @@ public class VoucherListChain extends ExecutableRequestChain {
         return this;
     }
 
+    /**
+     * @see SearchStringEncoder
+     */
     public VoucherListChain contactName(String contactName) {
         super.getUriBuilder()
-                .addParameter("contactName", contactName);
+                .addParameter("contactName", SearchStringEncoder.htmlEncode(contactName));
         return this;
     }
 

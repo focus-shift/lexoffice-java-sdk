@@ -2,6 +2,7 @@ package de.focus_shift.lexoffice.java.sdk.chain;
 
 
 import de.focus_shift.lexoffice.java.sdk.RequestContext;
+import de.focus_shift.lexoffice.java.sdk.SearchStringEncoder;
 import de.focus_shift.lexoffice.java.sdk.model.Contact;
 import de.focus_shift.lexoffice.java.sdk.model.ItemCreatedResult;
 import de.focus_shift.lexoffice.java.sdk.model.Page;
@@ -68,19 +69,23 @@ public class ContactChain {
 
         /**
          * filters contacts where any of their email addresses inside the emailAddresses JSON object match the given email value. At least 3 characters are necessary to successfully complete the query.
+         *
+         * @see SearchStringEncoder
          */
         public Fetch email(String email) {
             super.getUriBuilder()
-                    .addParameter("email", email);
+                    .addParameter("email", SearchStringEncoder.htmlEncode(email));
             return this;
         }
 
         /**
          * filters contacts whose name matches the given name value. At least 3 characters are necessary to successfully complete the query.
+         *
+         * @see SearchStringEncoder
          */
         public Fetch name(String name) {
             super.getUriBuilder()
-                    .addParameter("name", name);
+                    .addParameter("name", SearchStringEncoder.htmlEncode(name));
             return this;
         }
 
