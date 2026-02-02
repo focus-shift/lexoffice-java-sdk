@@ -6,8 +6,10 @@ import lombok.Getter;
 public enum ExecutionInterval {
 
     WEEKLY("WEEKLY"),
+    BIWEEKLY("BIWEEKLY"),
     MONTHLY("MONTHLY"),
     QUARTERLY("QUARTERLY"),
+    BIANNUALLY("BIANNUALLY"),
     ANNUALLY("ANNUALLY");
 
     @Getter
