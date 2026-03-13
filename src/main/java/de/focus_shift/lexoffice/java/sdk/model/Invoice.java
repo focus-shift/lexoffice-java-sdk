@@ -86,6 +86,9 @@ public class Invoice {
     @JsonProperty("remark")
     private String remark;
 
+    @JsonProperty("recurringTemplateId")
+    private String recurringTemplateId;
+
     @JsonProperty("files")
     private Files files;
 }

@@ -105,6 +105,7 @@ class InvoiceChainIntegrationTest {
                               "discountRange": 10
                             }
                           },
+                          "recurringTemplateId": "f4d3a8e1-2b5c-4d6e-9f1a-3c7b8d9e0f12",
                           "title": "Rechnung",
                           "introduction": "Ihre bestellten Positionen stellen wir Ihnen hiermit in Rechnung",
                           "remark": "Vielen Dank für Ihren Einkauf"
@@ -120,6 +121,7 @@ class InvoiceChainIntegrationTest {
     assertThat(invoice.getAddress().getName()).isEqualTo("Berliner Kindl GmbH");
     assertThat(invoice.getLineItems()).hasSize(1);
     assertThat(invoice.getLineItems().get(0).getName()).isEqualTo("Axa Rahmenschloss Defender RL");
+    assertThat(invoice.getRecurringTemplateId()).isEqualTo("f4d3a8e1-2b5c-4d6e-9f1a-3c7b8d9e0f12");
   }
 
   @Test
