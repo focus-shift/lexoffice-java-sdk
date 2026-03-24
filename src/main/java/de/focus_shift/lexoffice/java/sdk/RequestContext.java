@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import tools.jackson.databind.json.JsonMapper;
@@ -32,7 +33,7 @@ public class RequestContext {
                 .build();
         this.requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
         restTemplate = new RestTemplate(requestFactory);
-        restTemplate.setMessageConverters(List.of(new JacksonJsonHttpMessageConverter(getJsonMapper())));
+        restTemplate.setMessageConverters(List.of(new JacksonJsonHttpMessageConverter(getJsonMapper()), new ByteArrayHttpMessageConverter()));
     }
 
 
@@ -67,6 +68,25 @@ public class RequestContext {
                     .apiCalled();
         }
 
+
+        return response.getBody();
+    }
+
+    public synchronized byte[] downloadFile(RestUriBuilder uriBuilder) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(List.of(MediaType.APPLICATION_PDF, MediaType.ALL));
+        headers.add("Authorization", "Bearer " + apiBuilder.getApiToken());
+
+        checkThrottlePeriod();
+
+        HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+        ResponseEntity<byte[]> response = restTemplate.exchange(uriBuilder.build(), HttpMethod.GET, requestEntity, byte[].class);
+        lastCall = System.currentTimeMillis();
+        if (apiBuilder.throttleProviderPresent()) {
+            apiBuilder.getThrottleProvider()
+                    .apiCalled();
+        }
 
         return response.getBody();
     }

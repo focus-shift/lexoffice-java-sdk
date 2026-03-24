@@ -16,6 +16,10 @@ public class InvoiceChain {
         return new Get(context).get(id);
     }
 
+    public byte[] downloadFile(String id) {
+        return new DownloadFile(context).download(id);
+    }
+
     public Create create() {
         return new Create(context);
     }
@@ -32,6 +36,19 @@ public class InvoiceChain {
         public Invoice get(String id) {
             getUriBuilder().appendPath("/" + id);
             return getContext().execute(getUriBuilder(), HttpMethod.GET, TYPE_REFERENCE);
+        }
+    }
+
+    protected static class DownloadFile extends ExecutableRequestChain {
+
+        public DownloadFile(RequestContext context) {
+            super(context, "/invoices");
+        }
+
+        @SneakyThrows
+        public byte[] download(String id) {
+            getUriBuilder().appendPath("/" + id + "/file");
+            return getContext().downloadFile(getUriBuilder());
         }
     }
 
