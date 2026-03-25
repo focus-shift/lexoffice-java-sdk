@@ -167,6 +167,26 @@ class InvoiceChainIntegrationTest {
   }
 
   @Test
+  void downloadInvoiceFile() {
+    String invoiceId = "e9066f04-8cc7-4616-93f8-ac9571ec5e11";
+    byte[] pdfContent = "%PDF-1.4 fake pdf content".getBytes();
+
+    stubFor(
+        get(urlPathEqualTo("/v1/invoices/" + invoiceId + "/file"))
+            .willReturn(
+                aResponse()
+                    .withHeader("Content-Type", "application/pdf")
+                    .withHeader(
+                        "Content-Disposition",
+                        "attachment; filename=\"RE1019.pdf\"")
+                    .withBody(pdfContent)));
+
+    byte[] result = lexofficeApi.invoice().downloadFile(invoiceId);
+
+    assertThat(result).isEqualTo(pdfContent);
+  }
+
+  @Test
   void createInvoiceFinalized() {
     stubFor(
         post(urlPathEqualTo("/v1/invoices"))
