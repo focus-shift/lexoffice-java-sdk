@@ -1,5 +1,6 @@
 package de.focus_shift.lexoffice.java.sdk.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,4 +27,9 @@ public class ContactPerson {
 
     @JsonProperty("phoneNumber")
     private String phoneNumber;
+
+    // only known for contact persons of a company - must not be sent for the person of a person contact
+    @JsonProperty("primary")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Boolean primary;
 }

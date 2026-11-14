@@ -1,5 +1,6 @@
 package de.focus_shift.lexoffice.java.sdk.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,4 +45,20 @@ public class Contact {
 
     @JsonProperty("archived")
     private boolean archived;
+
+    @JsonProperty("xRechnung")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private XRechnung xRechnung;
+
+    // explicit accessors: lombok would generate getXRechnung/setXRechnung, which jackson maps to a
+    // second property "xrechnung"
+    @JsonProperty("xRechnung")
+    public XRechnung getXRechnung() {
+        return xRechnung;
+    }
+
+    @JsonProperty("xRechnung")
+    public void setXRechnung(XRechnung xRechnung) {
+        this.xRechnung = xRechnung;
+    }
 }
